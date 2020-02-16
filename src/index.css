@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.vm-10 {
+  margin: 10px 0;
+}
+
+.vp-10 {
+  padding: 10px 0;
+}
+
+.p-5 {
+  padding: 5px;
+}
