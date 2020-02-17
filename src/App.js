@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
-import Login from './components/login/login';
+import Login from './components/login/Login';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Home from './components/home/home';
+import Home from './components/home/Home';
+import AuthenticatedRoute from '../src/components/misc/AuthenticatedRoute';
 
 function App() {
   return (
@@ -11,9 +11,9 @@ function App() {
         <Route exact path='/login'>
           <Login />
         </Route>
-        <Route exact path='/'>
+        <AuthenticatedRoute exact path='/'>
           <Home />
-        </Route>
+        </AuthenticatedRoute>
         <Redirect to="/login" />
       </Switch>
     </div>

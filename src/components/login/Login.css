@@ -1,11 +1,15 @@
 .login {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   height: 100vh;
+  background-image: url('/images/wallpaper.jpeg');
+  background-position: center;
+  background-size: cover;
 }
 
 .login-container {
+  margin: 15% 0;
   width: 70%;
   height: 50%;
 }
@@ -15,6 +19,7 @@
   justify-content: center;
   align-items: center;
   height: 15%;
+  color: #00e6b8;
 }
 
 form {
@@ -23,8 +28,9 @@ form {
 
 .login-form {
   border-radius: 5px;
+  box-shadow: 0 0 30px #00e6b8;
   border: 2px solid #00e6b8;
-  background-color: #09a3b0;
+  /* background-color: #09a3b0; */
   color: white;
 }
 
@@ -43,11 +49,29 @@ form {
 }
 
 .login-input {
-  border: 2px solid #29a3a3;
+  border: 2px solid #00e6b8;
   border-radius: 5px;
   width: 80%;
 }
 
+.invalid-input {
+  border: 2px solid #ff4d4d;
+}
+
+.login-label {
+  font-size: 1.2rem;
+}
+
 .login-button {
-  
+  width: 20%;
+  border: 1px solid #00e6b8;
+  border-radius: 20px;
+}
+
+.login-button:hover {
+  box-shadow: 0 0 20px #00e6b8;
+}
+
+.login-input:focus {
+  box-shadow: 0 0 20px #00e6b8;
 }

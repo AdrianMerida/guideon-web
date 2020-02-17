@@ -1,9 +1,8 @@
 import React from 'react'
-import './login.css'
+import './Login.css'
 import { login } from '../../services/GuideonService'
 import { Redirect } from 'react-router-dom';
-
-// PENDIENTE DE PONER UN CONTEXTO PARA PASAR EL USUARIO POR LA APP :)
+import { WithAuthConsumer } from '../../contexts/AuthContext'
 
 class Login extends React.Component {
 
@@ -14,7 +13,6 @@ class Login extends React.Component {
     },
     error: false,
     loading: false,
-    user: undefined
   }
 
   handleSubmit = (event) => {
@@ -22,9 +20,8 @@ class Login extends React.Component {
 
     this.setState({ loading: true, error: false }, () => {
       login({ ...this.state.data })
-        .then(response => {
-          // this.props.setUser(response.data)
-          this.setState({user: response})
+        .then(user => {
+          this.props.setUser(user)
         },
           () => {
             this.setState({ error: true, loading: false })
@@ -45,8 +42,9 @@ class Login extends React.Component {
 
   render() {
 
-    // SOLO PARA PROBAR QUE LOGEA
-    if (this.state.user) {
+    const classInvalid = this.state.error ? 'invalid-input' : ''
+
+    if (this.props.currentUser) {
       return <Redirect to="/" />
     }
 
@@ -59,10 +57,10 @@ class Login extends React.Component {
             <div className="login-credentials">
 
               <div className="login-component vp-10">
-                <label className="vp-10" htmlFor="email">Email</label>
+                <label className="login-label vp-10" htmlFor="email">Email</label>
                 <input
-                  onChange={this.handleChange}
-                  className="login-input p-5"
+                  onBlur={this.handleChange}
+                  className={`login-input p-5 ${classInvalid}`}
                   autoComplete="off"
                   name="email"
                   type="email"
@@ -72,10 +70,10 @@ class Login extends React.Component {
               </div>
 
               <div className="login-component">
-                <label className="vp-10" htmlFor="password">Password</label>
+                <label className="login-label vp-10" htmlFor="password">Password</label>
                 <input
-                  onChange={this.handleChange}
-                  className="login-input p-5"
+                  onBlur={this.handleChange}
+                  className={`login-input p-5 ${classInvalid}`}
                   name="password"
                   type="password"
                   id="login-password"
@@ -83,13 +81,15 @@ class Login extends React.Component {
                 />
               </div>
 
-              <button
-                type="submit"
-                className=""
-                disabled={this.state.loading}
-              >
-                Log in
-            </button>
+              <div className="login-component">
+                <button
+                  type="submit"
+                  className="login-button p-5"
+                  disabled={this.state.loading}
+                >
+                  Log in
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -99,4 +99,4 @@ class Login extends React.Component {
 
 }
 
-export default Login
+export default WithAuthConsumer(Login)

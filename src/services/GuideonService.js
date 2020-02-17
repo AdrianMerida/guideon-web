@@ -5,6 +5,18 @@ const http = axios.create({
   withCredentials: true
 })
 
+http.interceptors.response.use(
+  response => response.data,
+  error => {
+    if (error.response && error.response.status === 401) {
+      localStorage.clear()
+      window.location.assign('/login')
+    }
+
+    return Promise.reject(error)
+  }
+)
+
 // USER
 export const login = ({ email, password }) => http.post('/login', { email, password }).then(res => res.data)
 export const logout = () => http.post('/logout').then(res => res.data)
