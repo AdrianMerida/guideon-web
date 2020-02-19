@@ -1,0 +1,21 @@
+.Map > .mapbox {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.mapboxgl-ctrl-top-right button {
+  height: 2rem;
+  width: 2rem;
+}
+.mapboxgl-ctrl span {
+  background-size: cover;
+}
