@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'https://api.mapbox.com',
-  withCredentials: true
+  baseURL: 'https://api.mapbox.com'
 })
 
 const accsessToken = `access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
