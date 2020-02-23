@@ -6,6 +6,20 @@ import { register, uploadImage } from '../../services/GuideonService'
 
 class Register extends React.Component {
 
+  getUserLocation = () => {
+    navigator.geolocation.getCurrentPosition((el) => {
+      this.setState({
+        data: {
+          ...this.state.data,
+          location: {
+            type: 'Point',
+            coordinates: [el.coords.longitude, el.coords.latitude]
+          }
+        }
+      })
+    })
+  }
+
   state = {
     data: {
       name: '',
@@ -14,8 +28,8 @@ class Register extends React.Component {
       description: '',
       avatarUrl: '',
       phoneNumber: '',
-      birthDate: new Date().toISOString().split('T')[0]
-      // location: null
+      birthDate: new Date().toISOString().split('T')[0],
+      location: this.getUserLocation()
     },
     error: {
       name: false,
@@ -28,7 +42,8 @@ class Register extends React.Component {
       // location: false
     },
     errors: false,
-    loading: false
+    loading: false,
+    register: false
   }
 
   handleSubmit = (event) => {
@@ -37,8 +52,11 @@ class Register extends React.Component {
       register({ ...this.state.data })
         .then(
           (user) => {
+            this.setState({
+              register: true
+            })
             // this.props.setUser(user)
-            return <Redirect to='/login' />
+            // return <Redirect to='/login' />
           },
           (error) => {
             console.log(error)
@@ -65,18 +83,17 @@ class Register extends React.Component {
 
     uploadImage(uploadData)
       .then(response => {
-        this.setState({data: { ...this.state.data, avatarUrl: response.secure_url }});
+        this.setState({ data: { ...this.state.data, avatarUrl: response.secure_url } });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
       });
   }
 
-
   render() {
 
-    if (this.props.currentUser) {
-      return <Redirect to="/" />
+    if (this.state.register) {
+      return <Redirect to="/login" />
     }
 
     return (
@@ -85,38 +102,86 @@ class Register extends React.Component {
 
           <div className="register-field">
             <label className="register-label" htmlFor="name"> Name </label>
-            <input onChange={this.handleChange} name="name" type="string" className="register-input" placeholder="Enter your name..."></input>
+            <input
+              onChange={this.handleChange}
+              name="name"
+              type="string"
+              className="register-input"
+              autoComplete="off"
+              placeholder="Enter your name...">
+            </input>
           </div>
 
           <div className="register-field">
             <label className="register-label" htmlFor="email"> Email </label>
-            <input onChange={this.handleChange} name="email" type="email" className="register-input" placeholder="Enter your email..."></input>
+            <input
+              onChange={this.handleChange}
+              name="email"
+              type="email"
+              className="register-input"
+              autoComplete="off"
+              placeholder="Enter your email...">
+            </input>
           </div>
 
           <div className="register-field">
             <label className="register-label" htmlFor="password"> Password </label>
-            <input onChange={this.handleChange} name="password" type="password" className="register-input"></input>
+            <input
+              onChange={this.handleChange}
+              name="password"
+              type="password"
+              autoComplete="off"
+              className="register-input">
+            </input>
           </div>
 
           <div className="register-field">
             <label className="register-label" htmlFor="description"> Description </label>
-            <input onChange={this.handleChange} name="description" type="string" className="register-input" placeholder="Something about you..."></input>
+            <input
+              onChange={this.handleChange}
+              name="description"
+              type="string"
+              className="register-input"
+              autoComplete="off"
+              placeholder="Something about you...">
+            </input>
           </div>
 
           <div className="register-field">
             <label className="register-label" htmlFor="avatarUrl"> Avatar </label>
-            <input name="avatarUrl" onChange={this.handleFileUpload} type="file" className="register-input"></input>
-            <img src={this.state.data.avatarUrl} alt="jey jey" />
+            <input
+              onChange={this.handleFileUpload}
+              name="avatarUrl"
+              type="file"
+              autoComplete="off"
+              className="register-input">
+            </input>
+            <img src={this.state.data.avatarUrl} alt="Avatar" />
           </div>
 
           <div className="register-field">
             <label className="register-label" htmlFor="phoneNumber"> Phone number </label>
-            <input onChange={this.handleChange} name="phoneNumber" type="string" className="register-input" placeholder="Enter your phone number..."></input>
+            <input
+              maxLength="9"
+              minLength="9"
+              onChange={this.handleChange}
+              name="phoneNumber"
+              type="string"
+              className="register-input"
+              autoComplete="off"
+              placeholder="Enter your phone number...">
+            </input>
           </div>
 
           <div className="register-field">
             <label className="register-label" htmlFor="birthDate"> Birth date </label>
-            <input onChange={this.handleChange} name="birthDate" type="date" className="register-input"></input>
+            <input
+              onChange={this.handleChange}
+              name="birthDate"
+              type="date"
+              autoComplete="off"
+              className="register-input">
+            </input>
           </div>
 
           <button type="submit" onSubmit={this.handleSubmit}>

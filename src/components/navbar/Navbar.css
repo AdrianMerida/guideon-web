@@ -1,0 +1,61 @@
+.navbar-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navbar-brand {
+  width: 30%;
+}
+.navbar-brand a{
+  width: 100%;
+  border: 3px solid green;
+  text-decoration: none;
+  font-size: 1.2rem;  
+}
+
+.navbar-logged {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  border: 3px solid red;
+}
+
+.navbar-available {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+}
+
+.navbar-available button {
+  border: none;
+}
+
+.navbar-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: red;
+  color:white;
+  box-shadow: 0 0 3px black;
+  /* border: 1px solid black; */
+}
+
+.navbar-avatar img{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.online {
+  background-color: #00ff99;
+}
+
+.offline {
+  background-color: #ff4d4d;
+}

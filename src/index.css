@@ -16,10 +16,31 @@
   padding: 5px;
 }
 
+.hp-5 {
+  padding: 0 5px;
+}
+
 .m-5 {
   margin: 5px;
 }
 
 .text-center {
   text-align: center;
+}
+
+.text-green {
+  color: #00e6b8;
+}
+
+.App {
+  height: 100vh;
+}
+
+.navbar {
+  height: 8%;
+  border: 3px solid blue;
+}
+
+.rest-application {
+  height: 92%;
 }
