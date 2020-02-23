@@ -24,6 +24,10 @@
   margin: 5px;
 }
 
+.hm-5 {
+  margin: 0 5px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -34,11 +38,14 @@
 
 .App {
   height: 100vh;
+  background-image: url('/images/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .navbar {
   height: 8%;
-  border: 3px solid blue;
 }
 
 .rest-application {

@@ -58,13 +58,13 @@ class Login extends React.Component {
         <div className="login-container">
 
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <h1 className="login-title">GUIDEON</h1>
+            <h1 className="login-title"><strong>GUIDEON</strong></h1>
 
             {this.state.error && <div className={`text-center p-5 ${classInvalid}`}>Wrong Credentials!</div>}
             <div className="login-credentials">
 
               <div className="login-component vp-10">
-                <label className="login-label vp-10" htmlFor="email">Email</label>
+                <label className="login-label vp-10" htmlFor="email"><strong>Email</strong></label>
                 <input
                   onFocus={this.removeError}
                   onChange={this.handleChange}
@@ -78,7 +78,7 @@ class Login extends React.Component {
               </div>
 
               <div className="login-component">
-                <label className="login-label vp-10" htmlFor="password">Password</label>
+                <label className="login-label vp-10" htmlFor="password"><strong>Password</strong></label>
                 <input
                   onFocus={this.removeError}
                   onChange={this.handleChange}

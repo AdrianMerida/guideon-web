@@ -1,11 +1,7 @@
 .login {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   height: 100%;
-  background-image: url('/images/wallpaper.jpeg');
-  background-position: center;
-  background-size: cover;
 }
 
 .login-container {
@@ -20,6 +16,7 @@
   align-items: center;
   height: 15%;
   color: #00e6b8;
+  text-shadow: 0 0 10px black;
 }
 
 form {
@@ -32,6 +29,7 @@ form {
   border: 2px solid #00e6b8;
   /* background-color: #09a3b0; */
   color: white;
+  text-shadow: 0 0 5px black;
 }
 
 .login-credentials {
