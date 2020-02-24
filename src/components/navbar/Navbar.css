@@ -79,6 +79,12 @@
   text-decoration: none;
   text-align: center;
   box-shadow: 0 0 10px black;
+  position: relative;
+  z-index: 999;
+}
+
+.navbar-dropdown-option:focus {
+  border: 3px solid red;
 }
 
 .navbar-welcome {

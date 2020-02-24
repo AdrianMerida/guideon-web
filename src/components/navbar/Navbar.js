@@ -52,6 +52,12 @@ class Navbar extends React.Component {
     this.setState({ showMenu: !this.state.showMenu })
   }
 
+  hideMenu = (e) => {
+    e.preventDefault()
+    this.setState({ showMenu: false })
+  }
+
+
   // goToProfile = (e) => (<Redirect to='/myProfile' />)
 
 
@@ -100,16 +106,6 @@ class Navbar extends React.Component {
 
           </div>
         )}
-
-        {/*
-              <div onClick={this.goToProfile} className="navbar-avatar hm-5">
-                <img src={this.props.currentUser.avatarUrl} alt="" />
-              </div>
-
-              <div onClick={this.props.logout} className="navbar-logout hm-5">
-                <i className="fa fa-power-off" />
-              </div>
-             */}
       </div>
     )
   }

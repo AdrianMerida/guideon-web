@@ -1,8 +1,9 @@
 import React from 'react'
-import { WithAuthConsumer } from '../../contexts/AuthContext'
+import  withUsers  from '../../hocs/withUsers'
+import Map from '../map/Map'
 
-const Home = ({currentUser}) => (
-  <div>{JSON.stringify(currentUser)}</div>
+const Home = ({users}) => (
+  <Map users={users}/>
 )
 
-export default WithAuthConsumer(Home)
+export default withUsers(Home)

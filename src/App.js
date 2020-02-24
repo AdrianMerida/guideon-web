@@ -29,6 +29,12 @@ function App() {
           <Route exact path='/mapbox'>
             <Map />
           </Route>
+          <Route exact path="/myProfile">
+
+          </Route>
+          <Route exact path="/chats">
+
+          </Route>
           <Redirect to="/login" />
         </Switch>
       </div>

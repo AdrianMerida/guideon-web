@@ -28,7 +28,7 @@ export const switchAvailability = () => http.put('/switchAvailability')
 export const switchUserState = () => http.put('/switchUserState')
 export const updateCost = (data) => http.put('/updateCost', data)
 export const uploadImage = (data) => http.post('/uploadImage', data)
-
+export const getUsers = () => http.get('/users')
 
 // CHAT & CONVERSATION
 export const getConversations = () => http.get('/conversations')
