@@ -17,25 +17,29 @@ function App() {
 
       <div className="rest-application">
         <Switch>
+
           <Route exact path='/login'>
             <Login />
           </Route>
+
           <Route exact path='/signup'>
             <Register />
           </Route>
+          
           <AuthenticatedRoute exact path='/'>
             <Home />
           </AuthenticatedRoute>
-          <Route exact path='/mapbox'>
-            <Map />
-          </Route>
-          <Route exact path="/myProfile">
 
-          </Route>
-          <Route exact path="/chats">
+          <AuthenticatedRoute exact path="/myProfile">
 
-          </Route>
+          </AuthenticatedRoute>
+
+          <AuthenticatedRoute exact path="/chats">
+
+          </AuthenticatedRoute>
+
           <Redirect to="/login" />
+
         </Switch>
       </div>
     </div>

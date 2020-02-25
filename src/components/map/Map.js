@@ -3,29 +3,28 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
 
-//DUDAS => NO SE PINTA LA IMAGEN, NO SE PINTAR EL POPUP, EL WIDTH SUPERA EL 100%...
-// EL MENU NO EMPIEZA CON VALOR FALSE Y SE DESPLIEGA..
-// HACER IMAGENES CIRCULARES...
-
-// import { forwardGeocoding } from '../../services/MapboxService'
-
 const Map = ({ users }) => {
 
-  console.log(users)
   const [userLocation, setUserLocation] = useState({})
   const [mapOpts, setMapOpts] = useState({ lng: -3.747858, lat: 40.355474, zoom: 15 })
   const [map, setMap] = useState(null);
   const mapContainer = useRef(null);
 
-  let el = document.createElement('div');
-  el.className = 'marker';
-  // let popup = new mapboxgl.Popup({ offset: 25 }).setText(
-  //   'Construction on the Washington Monument began in 1848.'
-  // );
-
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
-  // forwardGeocoding('Fuente').then(res => console.log(res))
+  const createMarker = (user, map) => {
+    const el = document.createElement('div')
+    el.className = 'marker'
+    el.style.backgroundImage = `url(${user.avatarUrl})`
+    el.style.width = (2 * mapOpts.zoom).toString() + 'px'
+    el.style.height = (2* mapOpts.zoom).toString() + 'px'
+    
+    new mapboxgl.Marker(el)
+      .setLngLat(user.location.coordinates)
+      .setPopup(new mapboxgl.Popup({ offset: 25 })
+        .setHTML(`<a class='ueuemi' href='asdfasdf'>${user.name}</a>`))
+      .addTo(map)
+  }
 
   const initializeMap = ({ setMap, mapContainer }) => {
 
@@ -44,8 +43,21 @@ const Map = ({ users }) => {
       setMap(map);
       map.resize();
 
-      
-    });
+      users.forEach(user => {
+        createMarker(user, map)
+      })
+
+      map.addControl(new mapboxgl.NavigationControl()) // más o menos zoom
+
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+          },
+          trackUserLocation: true
+        })
+      );
+    })
 
     map.on("touchend", (e) => {
       setMapOpts({
@@ -55,56 +67,10 @@ const Map = ({ users }) => {
       })
     })
 
-    map.addControl(new mapboxgl.NavigationControl()) // más o menos zoom
-
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      })
-    );
   }
 
-  useEffect(() => {
-    users.map(user => (
-      map.loadImage(
-        user.avatarUrl,
-        function (error, image) {
-          if (error) throw error;
-          map.addImage(user.id, image);
-          map.addSource('point', {
-            'type': 'geojson',
-            'data': {
-              'type': 'FeatureCollection',
-              'features': [
-                {
-                  'type': 'Feature',
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [user.location.coordinates[0], user.location.coordinates[1]]
-                  }
-                }
-              ]
-            }
-          });
-          map.addLayer({
-            'id': 'points',
-            'type': 'symbol',
-            'source': 'point',
-            'layout': {
-              'icon-image': user.id,
-              'icon-size': 0.15
-            }
-          });
-        })
-        
-        // new mapboxgl.Marker(el)
-        // .setLngLat(marker.geometry.coordinates)
-        // .addTo(map);
-    ))
-  }, [mapOpts.lng, mapOpts.lat, mapOpts.zoom])
+  // useEffect(() => {
+  //   }, [mapOpts.lng, mapOpts.lat, mapOpts.zoom])
 
   useEffect(() => {
 
@@ -134,4 +100,5 @@ const Map = ({ users }) => {
     </div>
   )
 }
+
 export default Map

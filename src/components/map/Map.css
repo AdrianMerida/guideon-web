@@ -1,8 +1,4 @@
-/* .Map > .mapbox {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-} 
+
 
  .mapContainer {
   position: absolute;
@@ -10,17 +6,42 @@
   right: 0;
   left: 0;
   bottom: 0;
-} */
+}
 
-/* .mapboxgl-ctrl-top-right button {
+.mapboxgl-ctrl-top-right button {
   height: 2rem;
   width: 2rem;
 }
+
 .mapboxgl-ctrl span {
   background-size: cover;
-} */
+}
+
+.mapboxgl-canvas-container  {
+  height: calc(100vh - 58.88px);
+  width: 100vw;
+}
+
+// PONER EL NAVBAR FIJO Y LUEGO HACER UN CAALC DEL MAPBOXGL HEIGHT
 
 .Map {
   width: 100%;
   height: 100%;
+  padding: 0;
 }
+/*
+.mapbox {
+  padding: 0;
+  margin: 0;
+}
+
+.marker {
+  border-radius: 50%;
+  cursor: pointer;
+  background-size: cover;
+}
+
+.ueuemi {
+  text-decoration: none;
+  color: red;
+} */
