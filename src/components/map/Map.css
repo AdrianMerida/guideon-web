@@ -1,5 +1,3 @@
-
-
  .mapContainer {
   position: absolute;
   top: 0;
@@ -8,31 +6,15 @@
   bottom: 0;
 }
 
-.mapboxgl-ctrl-top-right button {
-  height: 2rem;
-  width: 2rem;
-}
-
-.mapboxgl-ctrl span {
-  background-size: cover;
-}
-
 .mapboxgl-canvas-container  {
-  height: calc(100vh - 58.88px);
+  height: calc(100vh - 80px);
   width: 100vw;
 }
-
-// PONER EL NAVBAR FIJO Y LUEGO HACER UN CAALC DEL MAPBOXGL HEIGHT
 
 .Map {
   width: 100%;
   height: 100%;
   padding: 0;
-}
-/*
-.mapbox {
-  padding: 0;
-  margin: 0;
 }
 
 .marker {
@@ -41,7 +23,70 @@
   background-size: cover;
 }
 
-.ueuemi {
-  text-decoration: none;
-  color: red;
-} */
+.mapboxgl-popup-content {
+  width: 125px;
+  height: 75px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.user-marker {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  /* background-color: #49d0d0;   */
+  background-image: linear-gradient(90deg, white, #00e6b8);
+  box-shadow: 0 0 10px black;
+}
+
+.user-image {
+  width: 30%;
+}
+
+.user-image img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: auto;
+  width: 100%;
+  background-size: cover;
+}
+
+.user-data {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.user-name, .user-icons {
+  text-align: center;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.user-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user-icons i {
+  color: darkslategrey;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: #49d0d0;
+}

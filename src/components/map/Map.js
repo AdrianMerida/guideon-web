@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
+import { WithAuthConsumer } from '../../contexts/AuthContext'
 
-const Map = ({ users }) => {
+const Map = ({ users, currentUser }) => {
 
   const [userLocation, setUserLocation] = useState({})
   const [mapOpts, setMapOpts] = useState({ lng: -3.747858, lat: 40.355474, zoom: 15 })
@@ -17,12 +18,26 @@ const Map = ({ users }) => {
     el.className = 'marker'
     el.style.backgroundImage = `url(${user.avatarUrl})`
     el.style.width = (2 * mapOpts.zoom).toString() + 'px'
-    el.style.height = (2* mapOpts.zoom).toString() + 'px'
-    
+    el.style.height = (2.5 * mapOpts.zoom).toString() + 'px'
+
     new mapboxgl.Marker(el)
       .setLngLat(user.location.coordinates)
       .setPopup(new mapboxgl.Popup({ offset: 25 })
-        .setHTML(`<a class='ueuemi' href='asdfasdf'>${user.name}</a>`))
+        .setHTML(`
+        <div class="user-marker">
+          <div class="user-image">
+            <img src='${user.avatarUrl}'/>
+          </div>
+          <div class="user-data">
+            <h1 class="user-name"><strong>${user.name}</strong></h1>
+            <p>(${user.rating}/10)</p>
+            <div class="user-icons">
+              <a href="meetings/${user.id}"><i class="fa fa-calendar fa-2x"></i></a>
+              <a href="/chats/${user.id}"><i class="fa fa-comment fa-2x"></i></a>
+            </div>
+          </div>
+        </div>
+        `))
       .addTo(map)
   }
 
@@ -44,19 +59,21 @@ const Map = ({ users }) => {
       map.resize();
 
       users.forEach(user => {
-        createMarker(user, map)
+        if(user.id.toString() !== currentUser.id.toString()) {
+          createMarker(user, map)
+        }
       })
 
-      map.addControl(new mapboxgl.NavigationControl()) // más o menos zoom
+      // map.addControl(new mapboxgl.NavigationControl()) // más o menos zoom
 
-      map.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true
-          },
-          trackUserLocation: true
-        })
-      );
+      // map.addControl(
+      //   new mapboxgl.GeolocateControl({
+      //     positionOptions: {
+      //       enableHighAccuracy: true
+      //     },
+      //     trackUserLocation: true
+      //   })
+      // );
     })
 
     map.on("touchend", (e) => {
@@ -68,9 +85,6 @@ const Map = ({ users }) => {
     })
 
   }
-
-  // useEffect(() => {
-  //   }, [mapOpts.lng, mapOpts.lat, mapOpts.zoom])
 
   useEffect(() => {
 
@@ -101,4 +115,4 @@ const Map = ({ users }) => {
   )
 }
 
-export default Map
+export default WithAuthConsumer(Map)

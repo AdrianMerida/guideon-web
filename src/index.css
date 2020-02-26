@@ -45,9 +45,9 @@
 }
 
 .navbar {
-  height: 8%;
+  height: 80px;
 }
 
 .rest-application {
-  height: 92%;
+  height: caalc(100vh -80px);
 }

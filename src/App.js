@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/home/Home';
 import AuthenticatedRoute from '../src/components/misc/AuthenticatedRoute';
 import Register from './components/register/Register';
-import Map from './components/misc/Mapbox';
 import Navbar from './components/navbar/Navbar';
 
 function App() {
@@ -25,17 +24,25 @@ function App() {
           <Route exact path='/signup'>
             <Register />
           </Route>
-          
+
           <AuthenticatedRoute exact path='/'>
             <Home />
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/myProfile">
-
+            {/* PENDIENTE */}
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/chats">
+            {/* PENDIENTE */}
+          </AuthenticatedRoute>
 
+          <AuthenticatedRoute exact path="/chats/:userId">
+            {/* PENDIENTE */}
+          </AuthenticatedRoute>
+
+          <AuthenticatedRoute exact path="/meetings/:userId">
+            {/* PENDIENTE */}
           </AuthenticatedRoute>
 
           <Redirect to="/login" />
