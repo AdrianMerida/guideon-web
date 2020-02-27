@@ -1,10 +1,9 @@
 import React from 'react'
-import './Register.css'
-import { WithAuthConsumer } from '../../contexts/AuthContext'
-import { Link, Redirect } from 'react-router-dom'
+import './SignUp.css'
 import { register, uploadImage } from '../../services/GuideonService'
+import { Redirect } from 'react-router-dom'
 
-class Register extends React.Component {
+class SignUp extends React.Component {
 
   getUserLocation = () => {
     navigator.geolocation.getCurrentPosition((el) => {
@@ -26,7 +25,7 @@ class Register extends React.Component {
       email: '',
       password: '',
       description: '',
-      avatarUrl: '',
+      avatarUrl: 'http://icons.iconarchive.com/icons/icons8/android/256/Users-User-icon.png',
       phoneNumber: '',
       birthDate: new Date().toISOString().split('T')[0],
       location: this.getUserLocation()
@@ -46,6 +45,7 @@ class Register extends React.Component {
     register: false
   }
 
+
   handleSubmit = (event) => {
     event.preventDefault()
     this.setState({ loading: true, error: false }, () => {
@@ -55,8 +55,6 @@ class Register extends React.Component {
             this.setState({
               register: true
             })
-            // this.props.setUser(user)
-            // return <Redirect to='/login' />
           },
           (error) => {
             console.log(error)
@@ -80,7 +78,7 @@ class Register extends React.Component {
 
     const uploadData = new FormData();
     uploadData.append("avatarUrl", event.target.files[0]);
-    
+
     uploadImage(uploadData)
       .then(response => {
         this.setState({ data: { ...this.state.data, avatarUrl: response.secure_url } });
@@ -97,103 +95,100 @@ class Register extends React.Component {
     }
 
     return (
-      <div className='register'>
-        <form className="register-form" onSubmit={this.handleSubmit}>
+      <div className="profile-container">
 
-          <div className="register-field">
-            <label className="register-label" htmlFor="name"> Name </label>
+        <div className="profile-avatar">
+          <div className="profile-avatar-img-div"
+            style={{
+              backgroundImage: `url(${this.state.data.avatarUrl ? this.state.data.avatarUrl : 'http://icons.iconarchive.com/icons/icons8/android/256/Users-User-icon.png'})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <input type="file" name="avatarUrl" onChange={this.handleFileUpload} className="profile-avatar-img"></input>
+          </div>
+        </div>
+
+        <form className="profile-form" onSubmit={this.handleSubmit}>
+          <div className="profile-field">
+            <i className="profile-icon fa fa-user fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="name"
               type="string"
-              className="register-input"
+              className="profile-input"
               autoComplete="off"
-              placeholder="Enter your name...">
+              placeholder="Name">
             </input>
           </div>
 
-          <div className="register-field">
-            <label className="register-label" htmlFor="email"> Email </label>
+          <div className="profile-field">
+            <i className="profile-icon fa fa-envelope fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="email"
               type="email"
-              className="register-input"
+              className="profile-input"
               autoComplete="off"
-              placeholder="Enter your email...">
+              placeholder="Email Address">
             </input>
           </div>
 
-          <div className="register-field">
-            <label className="register-label" htmlFor="password"> Password </label>
+          <div className="profile-field">
+            <i className="profile-icon fa fa-lock fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="password"
               type="password"
+              className="profile-input"
               autoComplete="off"
-              className="register-input">
+              placeholder="Password">
             </input>
           </div>
 
-          <div className="register-field">
-            <label className="register-label" htmlFor="description"> Description </label>
+          <div className="profile-field">
+            <i className="profile-icon fa fa-phone fa-2x"></i>
             <input
               onChange={this.handleChange}
-              name="description"
-              type="string"
-              className="register-input"
-              autoComplete="off"
-              placeholder="Something about you...">
-            </input>
-          </div>
-
-          <div className="register-field">
-            <label className="register-label" htmlFor="avatarUrl"> Avatar </label>
-            <input
-              onChange={this.handleFileUpload}
-              name="avatarUrl"
-              type="file"
-              autoComplete="off"
-              className="register-input">
-            </input>
-            <img src={this.state.data.avatarUrl} alt="Avatar" />
-          </div>
-
-          <div className="register-field">
-            <label className="register-label" htmlFor="phoneNumber"> Phone number </label>
-            <input
               maxLength="9"
-              minLength="9"
-              onChange={this.handleChange}
               name="phoneNumber"
               type="string"
-              className="register-input"
+              className="profile-input"
               autoComplete="off"
-              placeholder="Enter your phone number...">
+              placeholder="Phone Number">
             </input>
           </div>
 
-          <div className="register-field">
-            <label className="register-label" htmlFor="birthDate"> Birth date </label>
+          <div className="profile-field">
+            <i className="profile-icon fa fa-birthday-cake fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="birthDate"
               type="date"
+              className="profile-input"
               autoComplete="off"
-              className="register-input">
+              placeholder="Birth Date">
             </input>
           </div>
 
-          <button type="submit" onSubmit={this.handleSubmit}>
-            Register!
-          </button>
-        </form>
+          <div className="profile-field">
+            <i className="profile-icon fa fa-info-circle fa-2x"></i>
+            <textarea
+              onChange={this.handleChange}
+              name="description"
+              type="string"
+              className="profile-input profile-description"
+              autoComplete="off"
+              placeholder="Write something about you">
+            </textarea>
+          </div>
 
+          <button className="profile-button" type="submit"><strong>Sign Up</strong></button>
+        </form>
       </div>
     )
   }
-
 }
 
-
-export default WithAuthConsumer(Register)
+export default SignUp

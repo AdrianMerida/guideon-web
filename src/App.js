@@ -5,6 +5,9 @@ import Home from './components/home/Home';
 import AuthenticatedRoute from '../src/components/misc/AuthenticatedRoute';
 import Register from './components/register/Register';
 import Navbar from './components/navbar/Navbar';
+import Profile from './components/profile/Profile';
+import SignUp from './components/signUp/SignUp';
+import NewLogin from './components/newLogin/newlogin';
 
 function App() {
   return (
@@ -18,11 +21,13 @@ function App() {
         <Switch>
 
           <Route exact path='/login'>
-            <Login />
+            {/* <Login /> */}
+            <NewLogin />
           </Route>
 
           <Route exact path='/signup'>
-            <Register />
+            {/* <Register /> */}
+            <SignUp />
           </Route>
 
           <AuthenticatedRoute exact path='/'>
@@ -30,10 +35,14 @@ function App() {
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/myProfile">
-            {/* PENDIENTE */}
+            <Profile />
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/chats">
+            {/* PENDIENTE */}
+          </AuthenticatedRoute>
+
+          <AuthenticatedRoute exact path="/meetings">
             {/* PENDIENTE */}
           </AuthenticatedRoute>
 

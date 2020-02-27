@@ -4,7 +4,6 @@ import './Navbar.css'
 import { switchAvailability, switchUserState } from '../../services/GuideonService'
 import NavbarDropdown from './NavbarDropdown'
 
-
 class NavbarLogged extends React.Component {
 
   state = {
@@ -49,12 +48,13 @@ class NavbarLogged extends React.Component {
   }
 
   showMenu = (e) => {
-    e.preventDefault()
     this.setState({ showMenu: !this.state.showMenu })
   }
 
-  // goToProfile = (e) => (<Redirect to='/myProfile' />)
-
+  hideMenu = (e) => {
+    // Cuando hace logOut da problemas
+    setTimeout(this.showMenu, 100)
+  }
 
   render() {
 
@@ -86,11 +86,14 @@ class NavbarLogged extends React.Component {
             <div onClick={this.changeAvailability} className={`hm-5 navbar-available ${availableClass}`} />
 
             <div className="navbar-dropdown">
-              <button onClick={this.showMenu} className="navbar-avatar">
+              <button onClick={this.showMenu} onBlur={this.hideMenu} className="navbar-avatar">
                 <img src={this.props.currentUser.avatarUrl} alt="" />
               </button>
               {this.state.showMenu &&
-                <NavbarDropdown onClickChangeStatus={this.changeStatus} onClickLogout={this.props.logout} />
+                <NavbarDropdown 
+                  onClickChangeStatus={this.changeStatus}
+                  onClickLogout={this.props.logout} 
+                />
               }
             </div>
 

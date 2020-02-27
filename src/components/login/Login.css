@@ -1,4 +1,4 @@
-.login {
+/* .login {
   display: flex;
   justify-content: center;
   height: 100%;
@@ -27,7 +27,6 @@ form {
   border-radius: 5px;
   box-shadow: 0 0 30px #00e6b8;
   border: 2px solid #00e6b8;
-  /* background-color: #09a3b0; */
   color: white;
   text-shadow: 0 0 5px black;
 }
@@ -84,4 +83,4 @@ form {
 
 .login-input:focus {
   box-shadow: 0 0 20px #00e6b8;
-}
+} */
