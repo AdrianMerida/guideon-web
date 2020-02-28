@@ -48,60 +48,54 @@ class Login extends React.Component {
   render() {
 
     const classInvalid = this.state.error ? 'invalid-input' : ''
+    const wrongCredentials = this.state.error ? 'login-wrong-credentials-show' : 'login-wrong-credentials-hide'
 
     if (this.props.currentUser) {
       return <Redirect to="/" />
     }
 
     return (
+
       <div className="login">
         <div className="login-container">
-
           <form className="login-form" onSubmit={this.handleSubmit}>
             <h1 className="login-title"><strong>WELCOME</strong></h1>
 
-            {this.state.error && <div className={`text-center p-5 ${classInvalid}`}>Wrong Credentials!</div>}
-            <div className="login-credentials">
+            {this.state.error &&
+              <div className={`${wrongCredentials}`}>Wrong Credentials!</div>}
 
-              
-              <div className="login-component vp-10">
-                <label className="login-label vp-10" htmlFor="email"><strong>Email</strong></label>
-                <input
-                  onFocus={this.removeError}
-                  onChange={this.handleChange}
-                  className={`login-input p-5 ${classInvalid}`}
-                  autoComplete="off"
-                  name="email"
-                  type="email"
-                  id="login-email"
-                  placeholder="Enter your email..."
-                />
-              </div>
-
-              <div className="login-component">
-                <label className="login-label vp-10" htmlFor="password"><strong>Password</strong></label>
-                <input
-                  onFocus={this.removeError}
-                  onChange={this.handleChange}
-                  className={`login-input p-5 ${classInvalid}`}
-                  name="password"
-                  type="password"
-                  id="login-password"
-                  placeholder="Enter your password..."
-                />
-              </div>
-
-              <div className="login-component">
-                <div className="login-buttons">
-                  <button type="submit" className="login-button p-5" disabled={this.state.loading}>
-                    Log in
-                  </button>
-                  <Link className="login-button p-5" to="/signup">Sign up</Link>
-                </div>
-
-              </div>
+            <div className="login-field">
+              <i className="login-icon fa fa-envelope fa-2x"></i>
+              <input
+                onFocus={this.removeError}
+                onChange={this.handleChange}
+                name="email"
+                type="email"
+                className={`login-input p-5 ${classInvalid}`}
+                autoComplete="off"
+                placeholder="Email Address">
+              </input>
             </div>
+
+            <div className="login-field">
+              <i className="login-icon fa fa-lock fa-2x"></i>
+              <input
+                onFocus={this.removeError}
+                onChange={this.handleChange}
+                name="password"
+                type="password"
+                className={`login-input p-5 ${classInvalid}`}
+                autoComplete="off"
+                placeholder="Password">
+              </input>
+            </div>
+
+            <button className="login-button" type="submit"><strong>Log in</strong></button>
           </form>
+          <div className="login-signup" >
+            Don't you have an account?
+            <Link className="login-signup-message" to="/signup"><strong>&nbsp;Sign up here!</strong></Link>
+          </div>
         </div>
       </div>
     )

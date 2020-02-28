@@ -18,7 +18,7 @@ const Map = ({ users, currentUser }) => {
     el.className = 'marker'
     el.style.backgroundImage = `url(${user.avatarUrl})`
     el.style.width = (2 * mapOpts.zoom).toString() + 'px'
-    el.style.height = (2.5 * mapOpts.zoom).toString() + 'px'
+    el.style.height = (2 * mapOpts.zoom).toString() + 'px'
 
     new mapboxgl.Marker(el)
       .setLngLat(user.location.coordinates)
@@ -32,7 +32,6 @@ const Map = ({ users, currentUser }) => {
             <h1 class="user-name"><strong>${user.name}</strong></h1>
             <p>(${user.rating}/10)</p>
             <div class="user-icons">
-              <a href="meetings/${user.id}"><i class="fa fa-calendar fa-2x"></i></a>
               <a href="/chats/${user.id}"><i class="fa fa-comment fa-2x"></i></a>
             </div>
           </div>
@@ -40,6 +39,20 @@ const Map = ({ users, currentUser }) => {
         `))
       .addTo(map)
   }
+
+  // <div class="user-marker">
+  //   <div class="user-image">
+  //     <img src='${user.avatarUrl}' />
+  //   </div>
+  //   <div class="user-data">
+  //     <h1 class="user-name"><strong>${user.name}</strong></h1>
+  //     <p>(${user.rating}/10)</p>
+  //     <div class="user-icons">
+  //       <a href="meetings/${user.id}"><i class="fa fa-calendar fa-2x"></i></a>
+  //       <a href="/chats/${user.id}"><i class="fa fa-comment fa-2x"></i></a>
+  //     </div>
+  //   </div>
+  // </div>
 
   const initializeMap = ({ setMap, mapContainer }) => {
 
@@ -66,14 +79,14 @@ const Map = ({ users, currentUser }) => {
 
       // map.addControl(new mapboxgl.NavigationControl()) // más o menos zoom
 
-      // map.addControl(
-      //   new mapboxgl.GeolocateControl({
-      //     positionOptions: {
-      //       enableHighAccuracy: true
-      //     },
-      //     trackUserLocation: true
-      //   })
-      // );
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+          },
+          trackUserLocation: true
+        })
+      );
     })
 
     map.on("touchend", (e) => {

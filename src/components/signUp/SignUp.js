@@ -95,10 +95,10 @@ class SignUp extends React.Component {
     }
 
     return (
-      <div className="profile-container">
+      <div className="signup-container">
 
-        <div className="profile-avatar">
-          <div className="profile-avatar-img-div"
+        <div className="signup-avatar">
+          <div className="signup-avatar-img-div"
             style={{
               backgroundImage: `url(${this.state.data.avatarUrl ? this.state.data.avatarUrl : 'http://icons.iconarchive.com/icons/icons8/android/256/Users-User-icon.png'})`,
               backgroundPosition: 'center',
@@ -106,85 +106,85 @@ class SignUp extends React.Component {
               backgroundRepeat: 'no-repeat'
             }}
           >
-            <input type="file" name="avatarUrl" onChange={this.handleFileUpload} className="profile-avatar-img"></input>
+            <input type="file" name="avatarUrl" onChange={this.handleFileUpload} className="signup-avatar-img"></input>
           </div>
         </div>
 
-        <form className="profile-form" onSubmit={this.handleSubmit}>
-          <div className="profile-field">
-            <i className="profile-icon fa fa-user fa-2x"></i>
+        <form className="signup-form" onSubmit={this.handleSubmit}>
+          <div className="signup-field">
+            <i className="signup-icon fa fa-user fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="name"
               type="string"
-              className="profile-input"
+              className="signup-input"
               autoComplete="off"
               placeholder="Name">
             </input>
           </div>
 
-          <div className="profile-field">
-            <i className="profile-icon fa fa-envelope fa-2x"></i>
+          <div className="signup-field">
+            <i className="signup-icon fa fa-envelope fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="email"
               type="email"
-              className="profile-input"
+              className="signup-input"
               autoComplete="off"
               placeholder="Email Address">
             </input>
           </div>
 
-          <div className="profile-field">
-            <i className="profile-icon fa fa-lock fa-2x"></i>
+          <div className="signup-field">
+            <i className="signup-icon fa fa-lock fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="password"
               type="password"
-              className="profile-input"
+              className="signup-input"
               autoComplete="off"
               placeholder="Password">
             </input>
           </div>
 
-          <div className="profile-field">
-            <i className="profile-icon fa fa-phone fa-2x"></i>
+          <div className="signup-field">
+            <i className="signup-icon fa fa-phone fa-2x"></i>
             <input
               onChange={this.handleChange}
               maxLength="9"
               name="phoneNumber"
               type="string"
-              className="profile-input"
+              className="signup-input"
               autoComplete="off"
               placeholder="Phone Number">
             </input>
           </div>
 
-          <div className="profile-field">
-            <i className="profile-icon fa fa-birthday-cake fa-2x"></i>
+          <div className="signup-field">
+            <i className="signup-icon fa fa-birthday-cake fa-2x"></i>
             <input
               onChange={this.handleChange}
               name="birthDate"
               type="date"
-              className="profile-input"
+              className="signup-input"
               autoComplete="off"
               placeholder="Birth Date">
             </input>
           </div>
 
-          <div className="profile-field">
-            <i className="profile-icon fa fa-info-circle fa-2x"></i>
+          <div className="signup-field">
+            <i className="signup-icon fa fa-info-circle fa-2x"></i>
             <textarea
               onChange={this.handleChange}
               name="description"
               type="string"
-              className="profile-input profile-description"
+              className="signup-input signup-description"
               autoComplete="off"
               placeholder="Write something about you">
             </textarea>
           </div>
 
-          <button className="profile-button" type="submit"><strong>Sign Up</strong></button>
+          <button className="signup-button" type="submit"><strong>Sign Up</strong></button>
         </form>
       </div>
     )

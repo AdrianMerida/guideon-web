@@ -100,3 +100,23 @@
 .offline {
   background-color: #ff4d4d;
 }
+
+/* UNLOGGED */
+.navbar-un-container {
+  height: 100%;
+  border-bottom: 5px solid black;
+}
+
+.navbar-un-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-shadow: 0 0 10px black;
+}
+
+.navbar-un-brand a {
+  text-decoration: none;
+  font-size: 3rem;  
+}

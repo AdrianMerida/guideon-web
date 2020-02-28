@@ -1,0 +1,17 @@
+.sender-me {
+  border-radius: 25px;
+  position: absolute;
+  right: 0;
+  width: fit-content;
+  background-color: #00cc99;
+  color: black;
+}
+
+.sender-other {
+  border-radius: 25px;
+  background-color: white;
+  color: black;
+  position: absolute;
+  left: 0;
+  width: fit-content;
+}

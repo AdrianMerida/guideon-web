@@ -1,13 +1,20 @@
 import React from 'react';
-import Login from './components/login/Login';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/home/Home';
 import AuthenticatedRoute from '../src/components/misc/AuthenticatedRoute';
-import Register from './components/register/Register';
 import Navbar from './components/navbar/Navbar';
 import Profile from './components/profile/Profile';
 import SignUp from './components/signUp/SignUp';
-import NewLogin from './components/newLogin/newlogin';
+import Login from './components/login/Login';
+import Conversation from './components/chat/Conversation';
+import Chat from './components/chat/Chat';
+
+// DUDAS
+// 1- AL HACER LOGOUT, COMO HAGO PARA QUE SE CIERRE EL MENU CON EL SETTIMOUT
+// 2- COMO VUELVO A DONDE ESTABA (AL CERRAR UNA CONVERSACIÓN)
+// 3- EN SINGLE CHATS , COMO OCULTAR EL PLACEHOLDER AL HACER FOCUS
+// 4- COGER FECHA Y HORA DE ISODATE
+// 5- NO ME HACE EL POST AL ENVIAR MENSAJE
 
 function App() {
   return (
@@ -21,12 +28,10 @@ function App() {
         <Switch>
 
           <Route exact path='/login'>
-            {/* <Login /> */}
-            <NewLogin />
+            <Login />
           </Route>
 
           <Route exact path='/signup'>
-            {/* <Register /> */}
             <SignUp />
           </Route>
 
@@ -39,7 +44,7 @@ function App() {
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/chats">
-            {/* PENDIENTE */}
+            <Conversation />
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/meetings">
@@ -47,7 +52,7 @@ function App() {
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/chats/:userId">
-            {/* PENDIENTE */}
+            <Chat />
           </AuthenticatedRoute>
 
           <AuthenticatedRoute exact path="/meetings/:userId">
