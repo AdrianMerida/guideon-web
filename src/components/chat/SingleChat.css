@@ -1,5 +1,5 @@
 .sender-me {
-  border-radius: 3px;
+  border-radius: 10px;
   align-self: flex-end;
   max-width: 80%;
   background-color: #00cc99;
@@ -21,7 +21,7 @@
 
 .message-date {
   width: fit-content;
-  color: white;
+  color: #737373;
   font-size: 0.9rem;
   white-space: nowrap;
 }

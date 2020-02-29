@@ -5,9 +5,17 @@ import './SingleChat.css'
 const SingleChat = ({ chat, currentUser }) => {
 
   const typeSender = chat.sender.toString() === currentUser.id.toString() ? 'sender-me' : 'sender-other'
+  
   const messageDate = () => {
     const testDate = new Date(chat.createdAt)
-    return testDate.getDate().toString().padStart(2, '0') + '-' + (testDate.getMonth() + 1).toString().padStart(2, '0')
+    return testDate.getHours() + ':' + testDate.getMinutes() + '-' +
+            testDate.getDate().toString().padStart(2, '0') + '/' + 
+            (testDate.getMonth() + 1).toString().padStart(2, '0')
+    // return testDate.getDate().toString().padStart(2, '0') + '/' +
+    //   (testDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+    //   testDate.getFullYear()
+
+    // return testDate.getDate().toString().padStart(2, '0') + '-' + (testDate.getMonth() + 1).toString().padStart(2, '0')
   }
 
   return (

@@ -20,8 +20,6 @@ const Map = ({ users, currentUser }) => {
 
   const createMarker = (user, map) => {
 
-    const prueba = () => onClickChat(user.id)
-
     const el = document.createElement('div')
     el.className = 'marker'
     el.style.backgroundImage = `url(${user.avatarUrl})`
@@ -40,32 +38,12 @@ const Map = ({ users, currentUser }) => {
             <p>(${user.rating}/10)</p>
             <div class="user-icons">
               <a href="/chats/${user.id}"><i class="fa fa-comment fa-2x"></i></a>
-              <button onclick="${prueba}"><i class="fa fa-comment fa-2x"></i></button>
             </div>
           </div>
         </div>
         `))
       .addTo(map)
   }
-
-  const onClickChat = (id) => {
-    console.log(id)
-    // return <Chat userId={id} />
-  }
-
-  // <div class="user-marker">
-  //   <div class="user-image">
-  //     <img src='${user.avatarUrl}' />
-  //   </div>
-  //   <div class="user-data">
-  //     <h1 class="user-name"><strong>${user.name}</strong></h1>
-  //     <p>(${user.rating}/10)</p>
-  //     <div class="user-icons">
-  //       <a href="meetings/${user.id}"><i class="fa fa-calendar fa-2x"></i></a>
-  //       <a href="/chats/${user.id}"><i class="fa fa-comment fa-2x"></i></a>
-  //     </div>
-  //   </div>
-  // </div>
 
   const initializeMap = ({ setMap, mapContainer }) => {
 

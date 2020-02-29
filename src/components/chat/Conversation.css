@@ -2,13 +2,10 @@
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  border: 3px solid red;
+  background-color: white;
+  opacity: 0.9;
 }
 
-.conversations-container {
-  display: flex;
-  align-items: center;
-  height: 15%;
-  margin-bottom: 3px;
-  border: 3px solid blue;
+.horizontal-split {
+  border: 1px solid blue;
 }
