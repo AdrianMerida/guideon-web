@@ -1,24 +1,33 @@
 import React from 'react'
 import './Conversation.css'
 import withConversations from '../../hocs/withConversations'
+import { WithAuthConsumer } from '../../contexts/AuthContext'
+
 import SingleConversation from './SingleConversation'
 
-class Conversation extends React.Component {
+const Conversation = ({ conversations, currentUser }) => {
 
-  state = {
-    conversations: this.props.conversations
-  }
-  
-  render(){
-    return(
-      <div className="conversations">
-        {this.state.conversations.map((conversation, i) => (
-          <SingleConversation conversation={conversation} key={i} />
-        ))}
-      </div>
-    )
+  if (!conversations.length) {
+    return <div>Loading...</div>
   }
 
+  const usersConversations = conversations.map((conversation, i) => ({
+    chats: conversation.chats,
+    user: conversation.users.find(user => user.id !== currentUser.id)
+  }))
+  console.log(usersConversations)
+  return (
+
+    <div className="conversations">
+      {usersConversations.map((conversation, i) =>
+        <div className="conversation-container" key={i}>
+          <div className="conversation-img">
+            {/* <img src=""></img> */}
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
-export default withConversations(Conversation)
+export default WithAuthConsumer(withConversations(Conversation))

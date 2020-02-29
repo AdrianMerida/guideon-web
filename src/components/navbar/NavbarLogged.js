@@ -3,6 +3,7 @@ import { WithAuthConsumer } from '../../contexts/AuthContext'
 import './Navbar.css'
 import { switchAvailability, switchUserState } from '../../services/GuideonService'
 import NavbarDropdown from './NavbarDropdown'
+// import { useParams } from 'react-router-dom'
 
 class NavbarLogged extends React.Component {
 
@@ -52,7 +53,6 @@ class NavbarLogged extends React.Component {
   }
 
   hideMenu = (e) => {
-    // Cuando hace logOut da problemas
     setTimeout(this.showMenu, 100)
   }
 
@@ -90,9 +90,9 @@ class NavbarLogged extends React.Component {
                 <img src={this.props.currentUser.avatarUrl} alt="" />
               </button>
               {this.state.showMenu &&
-                <NavbarDropdown 
+                <NavbarDropdown
                   onClickChangeStatus={this.changeStatus}
-                  onClickLogout={this.props.logout} 
+                  onClickLogout={this.props.logout}
                 />
               }
             </div>

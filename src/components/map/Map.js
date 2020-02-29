@@ -3,6 +3,11 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
 import { WithAuthConsumer } from '../../contexts/AuthContext'
+import Chat from '../chat/Chat'
+
+const UI = () => {
+  return <button>lsjflsajlfsafd</button>
+}
 
 const Map = ({ users, currentUser }) => {
 
@@ -14,12 +19,14 @@ const Map = ({ users, currentUser }) => {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
   const createMarker = (user, map) => {
+
+    const prueba = () => onClickChat(user.id)
+
     const el = document.createElement('div')
     el.className = 'marker'
     el.style.backgroundImage = `url(${user.avatarUrl})`
     el.style.width = (2 * mapOpts.zoom).toString() + 'px'
     el.style.height = (2 * mapOpts.zoom).toString() + 'px'
-
     new mapboxgl.Marker(el)
       .setLngLat(user.location.coordinates)
       .setPopup(new mapboxgl.Popup({ offset: 25 })
@@ -33,11 +40,17 @@ const Map = ({ users, currentUser }) => {
             <p>(${user.rating}/10)</p>
             <div class="user-icons">
               <a href="/chats/${user.id}"><i class="fa fa-comment fa-2x"></i></a>
+              <button onclick="${prueba}"><i class="fa fa-comment fa-2x"></i></button>
             </div>
           </div>
         </div>
         `))
       .addTo(map)
+  }
+
+  const onClickChat = (id) => {
+    console.log(id)
+    // return <Chat userId={id} />
   }
 
   // <div class="user-marker">
@@ -72,7 +85,7 @@ const Map = ({ users, currentUser }) => {
       map.resize();
 
       users.forEach(user => {
-        if(user.id.toString() !== currentUser.id.toString()) {
+        if (user.id.toString() !== currentUser.id.toString()) {
           createMarker(user, map)
         }
       })
@@ -123,6 +136,7 @@ const Map = ({ users, currentUser }) => {
 
   return (
     <div className="Map">
+      {/* {showModal && <Modal></Modal>} */}
       <div ref={mapContainer} className="mapbox" />
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Chat.css'
 import { getUserDetail, sendMsg } from '../../services/GuideonService'
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 import SingleChat from './SingleChat';
 
 class Chat extends React.Component {
@@ -10,7 +10,7 @@ class Chat extends React.Component {
     chats: [],
     closeConversation: false,
     loading: false,
-    otherUer: null,
+    otherUser: null,
     msg: null
   }
 
@@ -20,6 +20,14 @@ class Chat extends React.Component {
       .then(user => {
         this.setState({ otherUser: user })
       })
+
+    // if (this.state.chats.length) {
+    //   getChat(this.state.chats[0].conversationId)
+    //     .then(chats => {
+    //       console.log(chats)
+    //       this.setState({ chats: chats })
+    //     })
+    // }
   }
 
   closeConversation = () => {
@@ -29,16 +37,25 @@ class Chat extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.setState({ loading: true }, () => {
-      sendMsg(this.state.otherUser.id, this.state.msg)
+      sendMsg(this.state.otherUser.id, this.state)
         .then(
           (chat) => {
             this.setState({ loading: false, chats: [...this.state.chats, chat] })
+            console.log(this.state.chats)
           },
           (error) => {
             this.setState({ loading: false })
           })
     })
 
+  }
+
+  onClickMessage = (e) => {
+    e.target.placeholder = ''
+  }
+
+  onBlurMessage = (e) => {
+    e.target.placeholder = 'Write a message...'
   }
 
   handleChange = (event) => {
@@ -49,6 +66,10 @@ class Chat extends React.Component {
   }
 
   render() {
+
+    if (this.state.closeConversation) {
+      return <Redirect to="/" />
+    }
 
     if (!this.state.otherUser) {
       return <div>Loading...</div>
@@ -69,7 +90,7 @@ class Chat extends React.Component {
 
         <div className="chat-conversation">
           <div className="chat-conversation-chats">
-            {this.state.chats.map(chat => <SingleChat />)}
+            {this.state.chats.map((chat, i) => <SingleChat chat={chat} key={i} />)}
           </div>
 
           <form className="chat-conversation-form" onSubmit={this.handleSubmit}>
@@ -79,6 +100,8 @@ class Chat extends React.Component {
               type="string"
               className="chat-conversation-message"
               placeholder="Write a message..."
+              onClick={this.onClickMessage}
+              onBlur={this.onBlurMessage}
             >
             </textarea>
 

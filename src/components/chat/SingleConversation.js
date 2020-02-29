@@ -1,8 +1,8 @@
 import React from 'react'
 
-const SingleConversation = () => (
+const SingleConversation = ({ conversation }) => (
   <div>
-    SingleConversation
+    <a href={conversation.id}></a>
   </div>
 )
 
