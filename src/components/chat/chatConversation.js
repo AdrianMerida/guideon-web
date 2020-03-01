@@ -1,33 +1,27 @@
 import React from 'react'
 import './Chat.css'
-import { getUserDetail, sendMsg } from '../../services/GuideonService'
-import { withRouter, Redirect } from 'react-router';
+import { sendMsg, getOneConversation } from '../../services/GuideonService'
+import { Redirect } from 'react-router-dom';
 import SingleChat from './SingleChat';
+import withChats from '../../hocs/withChats'
+import { WithAuthConsumer } from '../../contexts/AuthContext'
 
-class Chat extends React.Component {
+class ChatConversation extends React.Component {
 
   state = {
-    chats: [],
     closeConversation: false,
     loading: false,
     otherUser: null,
-    msg: null
+    msg: ''
   }
 
   componentDidMount() {
-    const id = this.props.match.params.userId
-    getUserDetail(id)
-      .then(user => {
-        this.setState({ otherUser: user })
+    const conversationId = this.props.match.params.conversationId
+    getOneConversation(conversationId)
+      .then(conversation => {
+        const otherUser = conversation.users.find(user => user.id !== this.props.currentUser.id)
+        this.setState({ otherUser: otherUser })
       })
-
-    // if (this.state.chats.length) {
-    //   getChat(this.state.chats[0].conversationId)
-    //     .then(chats => {
-    //       console.log(chats)
-    //       this.setState({ chats: chats })
-    //     })
-    // }
   }
 
   closeConversation = () => {
@@ -40,14 +34,12 @@ class Chat extends React.Component {
       sendMsg(this.state.otherUser.id, this.state)
         .then(
           (chat) => {
-            this.setState({ loading: false, chats: [...this.state.chats, chat] })
-            console.log(this.state.chats)
+            this.setState({ loading: false, msg: '' })
           },
           (error) => {
             this.setState({ loading: false })
           })
     })
-
   }
 
   onClickMessage = (e) => {
@@ -72,7 +64,7 @@ class Chat extends React.Component {
     }
 
     if (!this.state.otherUser) {
-      return <div>Loading...</div>
+      return <div>Loading conversation...</div>
     }
 
     const closeClass = this.state.closeConversation ? 'close-conversation' : ''
@@ -88,9 +80,9 @@ class Chat extends React.Component {
           <button onClick={this.closeConversation} className="fa fa-window-close fa-2x"></button>
         </div>
 
-        <div className="chat-conversation">
+        <div id="chat-conversation" className="chat-conversation">
           <div className="chat-conversation-chats">
-            {this.state.chats.map((chat, i) => <SingleChat chat={chat} key={i} />)}
+            {this.props.chats.map((chat, i) => <SingleChat chat={chat} key={i} />)}
           </div>
 
           <form className="chat-conversation-form" onSubmit={this.handleSubmit}>
@@ -98,6 +90,7 @@ class Chat extends React.Component {
               name="msg"
               onChange={this.handleChange}
               type="string"
+              value={this.state.msg}
               className="chat-conversation-message"
               placeholder="Write a message..."
               onClick={this.onClickMessage}
@@ -114,4 +107,4 @@ class Chat extends React.Component {
   }
 }
 
-export default withRouter(Chat)
+export default WithAuthConsumer(withChats(ChatConversation))

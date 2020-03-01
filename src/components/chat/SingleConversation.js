@@ -14,10 +14,8 @@ const SingleConversation = ({ conversation }) => {
       testDate.getFullYear()
   }
 
-  console.log(conversation.chats.conversationId)
-
   return (
-    <Link to={`/chats/${conversation.chats.conversationId}`} className="conversation-container">
+    <Link to={`/conversations/${conversation.chats.conversationId}`} className="conversation-container">
       <div className="conversation-img">
         <img src={conversation.otherUser.avatarUrl} alt="avatar"></img>
       </div>

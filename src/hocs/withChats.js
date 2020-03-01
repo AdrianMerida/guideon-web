@@ -3,9 +3,13 @@ import { getChat } from '../services/GuideonService'
 
 const withChats = (WrappedComponent) => {
   class HOC extends React.Component {
+
+    clearChatRefresh = () => {
+       clearInterval(this.intervalId)
+    }
+
     state = {
       chats: [],
-      intervalId: null
     }
 
     componentDidMount() {
@@ -15,18 +19,18 @@ const withChats = (WrappedComponent) => {
     getChats = () => {
       const conversationId = this.props.match.params.conversationId
       getChat(conversationId)
-          .then(chats => {
-            this.setState({ chats: chats})
-          })
+        .then(chats => {
+          this.setState({ chats: chats })
+        })
     }
 
     componentWillUnmount() {
-      clearInterval(this.intervalId)
+      this.clearChatRefresh()
     }
 
     render() {
       return (
-        <WrappedComponent {...this.props} chats={this.state.chats} />
+        <WrappedComponent {...this.props} chats={this.state.chats} clearChatRefresh={this.clearChatRefresh} />
       );
     }
   }

@@ -7,8 +7,8 @@ import Profile from './components/profile/Profile';
 import SignUp from './components/signUp/SignUp';
 import Login from './components/login/Login';
 import Conversation from './components/chat/Conversation';
-import Chat from './components/chat/Chat';
-import NewChat from './components/chat/newChat';
+import NewChat2 from './components/chat/newChat2';
+import chatConversation from './components/chat/chatConversation';
 
 // DUDAS
 // 1- AL HACER LOGOUT, COMO HAGO PARA QUE SE CIERRE EL MENU CON EL SETTIMOUT => done
@@ -52,7 +52,9 @@ function App() {
             {/* PENDIENTE */}
           </AuthenticatedRoute>
 
-          <AuthenticatedRoute exact path="/chats/:conversationId" component={NewChat} />
+          <AuthenticatedRoute exact path="/conversations/:conversationId" component={chatConversation} />
+
+          <AuthenticatedRoute exact path="/chats/:conversationId" component={NewChat2} />
 
           <AuthenticatedRoute exact path="/meetings/:userId">
             {/* PENDIENTE */}

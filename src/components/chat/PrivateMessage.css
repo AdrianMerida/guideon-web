@@ -1,0 +1,74 @@
+.private-message {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.private-message-sent {
+  color: #4d94ff;
+  font-size: 2rem;
+  border: 5px solid #00e6b8;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 0 10px black;
+}
+
+.private-message-container {
+  border-radius: 5px;
+  border: 3px solid #8c8c8c;
+  height: 70%;
+  width: 80%;
+  background-color: white;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.private-message-user-information {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  height: 15%;
+}
+
+.private-message-container img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid black;
+}
+
+.private-message-form {
+  height: 80%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.private-message-msg {
+  resize: none;
+  height: 90%;
+  width: 100%;
+  border: 2px solid #8c8c8c;
+  padding: 5px;
+}
+
+.private-message-button {
+  margin: 10px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  border-style: none;
+  color: white;
+  background-color: #4d94ff;
+}

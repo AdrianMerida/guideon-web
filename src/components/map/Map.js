@@ -3,11 +3,6 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
 import { WithAuthConsumer } from '../../contexts/AuthContext'
-import Chat from '../chat/Chat'
-
-const UI = () => {
-  return <button>lsjflsajlfsafd</button>
-}
 
 const Map = ({ users, currentUser }) => {
 

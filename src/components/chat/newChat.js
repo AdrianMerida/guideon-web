@@ -1,10 +1,11 @@
 import React from 'react'
 import './Chat.css'
-import { sendMsg, getOneConversation } from '../../services/GuideonService'
+import { sendMsg, getOneConversation, existConversation } from '../../services/GuideonService'
 import { Redirect } from 'react-router-dom';
 import SingleChat from './SingleChat';
 import withChats from '../../hocs/withChats'
 import { WithAuthConsumer } from '../../contexts/AuthContext'
+import PrivateMessage from './PrivateMessage';
 
 class NewChat extends React.Component {
 
@@ -12,16 +13,45 @@ class NewChat extends React.Component {
     closeConversation: false,
     loading: false,
     otherUser: null,
-    msg: ''
+    msg: '',
+    privateMessage: false,
+    converId: ''
   }
 
   componentDidMount() {
     const conversationId = this.props.match.params.conversationId
     getOneConversation(conversationId)
       .then(conversation => {
-        const otherUser = conversation.users.find(user => user.id !== this.props.currentUser.id)
-        this.setState({ otherUser: otherUser })
+        if (!conversation) {
+          //  SI NO ENCUENTRA, ES PORQUE ES UN MENSAJE A UN USUARIO
+          //  HAY QUE VER SI YA EXISTE CONVERSACIÓN ENTRE ELLOS
+          existConversation(conversationId)
+            .then(conver => {
+              if (!conver) {
+                this.setState({ privateMessage: true })
+              } else {
+                // SI ENTRA DESDE EL MAPBOX
+                const converId = conver.chats.conversationId;
+                this.setState({converId: converId})
+                // getOneConversation(converId)
+                //   .then(conv => {
+                //     const otherUser = conv.users.find(user => user.id !== this.props.currentUser.id)
+                //     this.setState({ otherUser: otherUser })
+                //   })
+              }
+            })
+        }
+
+        // SI ENTRA DESDE CHATS
+        if (conversation) {
+          const otherUser = conversation.users.find(user => user.id !== this.props.currentUser.id)
+          this.setState({ otherUser: otherUser })
+        }
       })
+  }
+
+  hidePrivateMessage = () => {
+    this.setState({ privateMessage: false })
   }
 
   closeConversation = () => {
@@ -59,12 +89,26 @@ class NewChat extends React.Component {
 
   render() {
 
-       if (this.state.closeConversation) {
+    if (this.state.closeConversation) {
       return <Redirect to="/" />
     }
 
+    if (this.state.privateMessage) {
+      this.props.clearChatRefresh()
+      const conversationId = this.props.match.params.conversationId
+      return <PrivateMessage
+        currentUser={this.props.currentUser}
+        id={conversationId}
+        onClickHide={this.hidePrivateMessage} />
+    }
+
+    if (this.state.converId) {
+      console.log('redirected')
+      return <Redirect to={`/conversations/${this.state.converId}`} />
+    }
+  
     if (!this.state.otherUser) {
-      return <div>Loading...</div>
+      return <div>Loading...wey</div>
     }
 
     const closeClass = this.state.closeConversation ? 'close-conversation' : ''
