@@ -11,13 +11,18 @@
   align-items: center;
 }
 
-/* .sender-other {
-  border-radius: 25px;
+.sender-other {
+  border-radius: 10px;
+  align-self: flex-start;
+  max-width: 80%;
   background-color: white;
   color: black;
-  align-self: flex-start;
-  width: fit-content;
-} */
+  margin: 3px;
+  padding: 5px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
 
 .message-date {
   width: fit-content;

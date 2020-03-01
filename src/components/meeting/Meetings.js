@@ -6,8 +6,10 @@ import SingleMeeting from './SingleMeeting'
 
 const Meetings = ({ meetings, currentUser }) => {
 
+  console.log(meetings)
+
   if (!meetings.length) {
-    return <div>Loading...</div>
+    return <div>No meetings...</div>
   }
 
   return (
