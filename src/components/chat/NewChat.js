@@ -1,5 +1,4 @@
 import React from 'react'
-import './Chat.css'
 import { getOneConversation, existConversation } from '../../services/GuideonService'
 import { Redirect } from 'react-router-dom';
 import withChats from '../../hocs/withChats'

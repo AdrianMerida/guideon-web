@@ -60,7 +60,7 @@ class ChatConversation extends React.Component {
   render() {
 
     if (this.state.closeConversation) {
-      return <Redirect to="/" />
+      return <Redirect to="/chats" />
     }
 
     if (!this.state.otherUser) {

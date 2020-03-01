@@ -14,6 +14,6 @@ http.interceptors.response.use(
 )
 
 // SEARCH
-export const forwardGeocoding = (place, parameters = '') => http.get(`/geocoding/v5/mapbox.places/${place}.json?${accsessToken}`)
+export const forwardGeocoding = (place, parameters = '') => http.get(`/geocoding/v5/mapbox.places/${place}.json?&${accsessToken}`)
 export const reverseGeocoding = (longitude, latitude) => http.get(`/geocoding/v5/mapbox.places/${longitude},${latitude}.json?${accsessToken}`)
 

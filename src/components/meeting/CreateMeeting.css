@@ -1,0 +1,11 @@
+.react-datetime-picker__inputGroup__input {
+  color: red;
+}
+
+.react-datetime-picker__inputGroup__divider {
+  color: white;
+}
+
+.react-datetime-picker__button svg {
+  background-color: white;
+}

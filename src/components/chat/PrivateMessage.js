@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './PrivateMessage.css'
 import { sendMsg, getUserDetail } from '../../services/GuideonService'
+import { Redirect } from 'react-router-dom'
 
 class PrivateMessage extends React.Component {
 
@@ -16,6 +17,11 @@ class PrivateMessage extends React.Component {
       .then(user =>
         this.setState({ otherUser: user })
       )
+      if(this.state.sentMsg) {
+        console.log('Volviendo a home')
+        setTimeout(this.goHome(), 2000)
+      }
+
   }
 
   handleSubmit = (e) => {
@@ -25,8 +31,7 @@ class PrivateMessage extends React.Component {
         .then(
           (chat) => {
             if (chat) {
-              setTimeout(this.props.onClickHide, 10000)
-              this.setState({ sentMsg: true })
+              this.setState({ loading: false, sentMsg: true })
             }
           },
           (error) => {
@@ -34,6 +39,8 @@ class PrivateMessage extends React.Component {
           })
     })
   }
+
+  goHome = () => <Redirect to="/" />
 
   handleChange = (event) => {
     const { name, value } = event.target
@@ -49,6 +56,7 @@ class PrivateMessage extends React.Component {
   onBlurMessage = (e) => {
     e.target.placeholder = 'Write a message...'
   }
+
 
   render() {
 

@@ -7,15 +7,15 @@ import Profile from './components/profile/Profile';
 import SignUp from './components/signUp/SignUp';
 import Login from './components/login/Login';
 import Conversation from './components/chat/Conversation';
-import NewChat2 from './components/chat/newChat2';
+import NewChat from './components/chat/NewChat';
 import chatConversation from './components/chat/chatConversation';
+import CreateMeeting from './components/meeting/CreateMeeting';
+import Meetings from './components/meeting/Meetings';
+import MeetingDetail from './components/meeting/MeetingDetail';
 
 // DUDAS
-// 1- AL HACER LOGOUT, COMO HAGO PARA QUE SE CIERRE EL MENU CON EL SETTIMOUT => done
-// 2- COMO VUELVO A DONDE ESTABA (AL CERRAR UNA CONVERSACIÓN)ok
-// 3- EN SINGLE CHATS , COMO OCULTAR EL PLACEHOLDER AL HACER FOCUS => done
-// 4- COGER FECHA Y HORA DE ISODATE => done
-// 5- NO ME HACE EL POST AL ENVIAR MENSAJE => ok => done
+// 1 => COMO HACER LO DEL SETTIMEOUT
+// 2 => EL DATETIME PICKER ME PONE UN GMT +1 Y ME LA LÍA AL GUARDARLO EN MONGO
 
 function App() {
   return (
@@ -48,17 +48,15 @@ function App() {
             <Conversation />
           </AuthenticatedRoute>
 
-          <AuthenticatedRoute exact path="/meetings">
-            {/* PENDIENTE */}
-          </AuthenticatedRoute>
+          <AuthenticatedRoute exact path="/meetings" component={Meetings} />
+
+          <AuthenticatedRoute exact path="/meetings/create" component={CreateMeeting} />
 
           <AuthenticatedRoute exact path="/conversations/:conversationId" component={chatConversation} />
 
-          <AuthenticatedRoute exact path="/chats/:conversationId" component={NewChat2} />
+          <AuthenticatedRoute exact path="/chats/:conversationId" component={NewChat} />
 
-          <AuthenticatedRoute exact path="/meetings/:userId">
-            {/* PENDIENTE */}
-          </AuthenticatedRoute>
+          <AuthenticatedRoute exact path="/meetings/:meetingId" component={MeetingDetail} />
 
           <Redirect to="/login" />
 
