@@ -78,9 +78,9 @@ class NavbarLogged extends React.Component {
               <div className="navbar-welcome text-center">
                 Have a nice day <strong>{this.props.currentUser.name}</strong>!
               </div>
-              <div className="navbar-welcome text-center">
+              {/* <div className="navbar-welcome text-center">
                 You are currently as <strong>{this.props.currentUser.state}</strong>!
-              </div>
+              </div> */}
             </div>
 
             <div onClick={this.changeAvailability} className={`hm-5 navbar-available ${availableClass}`} />

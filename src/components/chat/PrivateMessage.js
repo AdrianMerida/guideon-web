@@ -17,11 +17,9 @@ class PrivateMessage extends React.Component {
       .then(user =>
         this.setState({ otherUser: user })
       )
-      if(this.state.sentMsg) {
-        console.log('Volviendo a home')
-        setTimeout(this.goHome(), 2000)
-      }
-
+    // if(this.state.sentMsg) {
+    //   setTimeout(this.goHome(), 2000)
+    // }
   }
 
   handleSubmit = (e) => {
@@ -32,6 +30,7 @@ class PrivateMessage extends React.Component {
           (chat) => {
             if (chat) {
               this.setState({ loading: false, sentMsg: true })
+              this.goHome()
             }
           },
           (error) => {
@@ -40,7 +39,9 @@ class PrivateMessage extends React.Component {
     })
   }
 
-  goHome = () => <Redirect to="/" />
+  goHome = () => {
+    setTimeout(() => { window.location.assign('/') }, 2000)
+  }
 
   handleChange = (event) => {
     const { name, value } = event.target

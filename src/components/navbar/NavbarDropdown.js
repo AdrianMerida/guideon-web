@@ -9,7 +9,7 @@ const NavbarDropdown = ({ onClickChangeStatus, onClickLogout, onBlurHideDropdown
     <Link className="navbar-dropdown-option p-5" to="/meetings">My Meetings</Link>
     <Link className="navbar-dropdown-option p-5" to="/meetings/create">Create Meeting</Link>
     <Link className="navbar-dropdown-option p-5" to="/meetings/search">Search Meeting</Link>
-    <div className="navbar-dropdown-option p-5" onClick={onClickChangeStatus}>Change status</div>
+    {/* <div className="navbar-dropdown-option p-5" onClick={onClickChangeStatus}>Change status</div> */}
     <div className="navbar-dropdown-option p-5" onClick={onClickLogout}>Log out</div>
   </div>
 )

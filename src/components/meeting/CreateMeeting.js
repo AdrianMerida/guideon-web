@@ -19,6 +19,7 @@ class CreateMeeting extends React.Component {
     errorLocation: false, // por si diera tiempo
     errorDuration: false,
     meetingCreated: false,
+    description: ''
   }
 
   handleSubmit = (event) => {
@@ -29,6 +30,7 @@ class CreateMeeting extends React.Component {
           (meeting) => {
             if (meeting) {
               this.setState({ meetingCreated: true })
+              this.goHome()
             }
           },
           () => {
@@ -37,11 +39,14 @@ class CreateMeeting extends React.Component {
     })
   }
 
+  goHome = () => {
+    setTimeout(() => { window.location.assign('/') }, 2000)
+  }
+
   getLocations = (input) => {
     if (input !== "") {
       forwardGeocoding(input)
         .then(locations => {
-          console.log(locations)
           const searchLocations = locations.features.map(location =>
             ({ 'value': location.place_name, 'label': location.place_name }))
           this.setState({ locationOptions: searchLocations })
@@ -49,12 +54,20 @@ class CreateMeeting extends React.Component {
     }
   }
 
+  handleChange = (event) => {
+    const { name, value } = event.target
+    this.setState({
+         [name]: value
+      })
+  }
+
   dateOnChange = date => {
     // Pone una hora menos por defecto
     // const newDate = date.setHours(date.getHours() + 1);
     // console.log(date)
     // return
-    this.setState({ date: date })
+    // console.log(typeof(new Date(date.toString())))
+    this.setState({ date: date.toString() })
   }
 
   selectDurationChange = event => {
@@ -81,15 +94,15 @@ class CreateMeeting extends React.Component {
       { value: '4', label: 'Cuatro horas' },
     ]
 
-    if (this.state.meetingCreated) {
-      return <Redirect to="/" />
-    }
-
     return (
       <div className="create-meeting">
+        {this.state.meetingCreated && (
+          <div className="create-meeting-sent"><strong>Meeting Created!</strong></div>
+        )}
         <div className="create-meeting-container">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="create-meeting-form">
             <Select
+              className="create-meeting-selector"
               closeMenuOnSelect={false}
               options={options}
               searchable={true}
@@ -97,6 +110,7 @@ class CreateMeeting extends React.Component {
               placeholder="Select duration..."
             />
             <Select
+              className="create-meeting-selector"
               closeMenuOnSelect={false}
               searchable={true}
               isDisabled={false}
@@ -112,7 +126,15 @@ class CreateMeeting extends React.Component {
               value={this.state.date}
             />
 
-            <button type="submit">Create</button>
+            <textarea
+              value={this.state.description}
+              onChange={this.handleChange}
+              className="create-meeting-msg"
+              placeholder="Write a message..."
+              name="description"
+            />
+
+            <button className="create-meeting-create-button" type="submit">Create</button>
           </form>
         </div>
       </div>

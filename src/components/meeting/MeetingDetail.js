@@ -1,6 +1,7 @@
 import React from 'react'
 import { getOneMeeting } from '../../services/GuideonService'
 import './MeetingDetail.css'
+import { Link } from 'react-router-dom'
 
 class MeetingDetail extends React.Component {
 
@@ -14,7 +15,6 @@ class MeetingDetail extends React.Component {
     const meetingId = this.props.match.params.meetingId
     getOneMeeting(meetingId)
       .then(meeting => {
-        console.log(meeting)
         this.setState({ meeting: meeting })
       })
   }
@@ -31,35 +31,51 @@ class MeetingDetail extends React.Component {
       return <div>Loading...</div>
     }
 
+    if (this.state.closeMeeting) {
+      window.location.assign('/meetings')
+    }
+
     const closeClass = this.state.closeMeeting ? 'close-meeting' : ''
 
     return (
       <div className={`meeting-detail ${closeClass}`}>
         <button onClick={this.closeMeeting} className="meeting-detail-close fa fa-window-close fa-2x"></button>
         <div className="meeting-detail-container">
-          <h1>Meeting</h1>
+          <h2>Meeting - {this.state.meeting.state}</h2>
 
           <div className="meeting-detail-users">
             <div className="meeting-detail-sender">
               <img src={this.state.meeting.sender.avatarUrl} alt="avatar"></img>
-              <button onClick={this.closeMeeting} className="meeting-detail-like fa fa-heart fa-2x"></button>
+              <Link to={`/chats/${this.state.meeting.sender.id}`} className="meeting-detail-chat fa fa-comment fa-2x"></Link>
               <h3>{this.state.meeting.sender.name}</h3>
             </div>
 
-            <div className="meeting-detail-receiver">
-              <img src={this.state.meeting.sender.avatarUrl} alt="avatar"></img>
-              <button onClick={this.closeMeeting} className="meeting-detail-like fa fa-heart fa-2x"></button>
-              <h3>{this.state.meeting.sender.name}</h3>
-            </div>
+            {this.state.meeting.receiver && (
+              <div className="meeting-detail-receiver">
+                <img src={this.state.meeting.receiver.avatarUrl} alt="avatar"></img>
+                <Link to={`/chats/${this.state.meeting.receiver.id}`} className="meeting-detail-chat fa fa-comment fa-2x"></Link>
+                <h3>{this.state.meeting.receiver.name}</h3>
+              </div>
+            )}
+
+            {!this.state.meeting.receiver && (
+              <div className="meeting-detail-receiver">
+                <img src="http://icons.iconarchive.com/icons/icons8/android/256/Users-User-icon.png" alt="avatar"></img>
+                {/* <button onClick={this.closeMeeting} className="meeting-detail-like fa fa-comment fa-2x"></button> */}
+                <h3>- - -</h3>
+              </div>
+            )}
+
+
           </div>
 
           <div className="meeting-detail-information">
             <div className="meeting-detail-information-state">
-              <i className="fa fa-map-marker fa-2x"></i>
+              <i className="fa fa-map-marker fa-2x color-red"></i>
               <h3 className="meeting-detail-location">{this.state.meeting.location}</h3>
             </div>
             <div className="meeting-detail-information-state">
-              <i className="fa fa-hourglass fa-2x"></i>
+              <i className="fa fa-hourglass fa-2x color-sand"></i>
               <h3 className="meeting-detail-location">{this.state.meeting.duration} hours</h3>
             </div>
             <div className="meeting-detail-information-state">

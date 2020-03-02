@@ -12,11 +12,12 @@ import chatConversation from './components/chat/chatConversation';
 import CreateMeeting from './components/meeting/CreateMeeting';
 import Meetings from './components/meeting/Meetings';
 import MeetingDetail from './components/meeting/MeetingDetail';
+import SearchMeeting from './components/meeting/SearchMeeting';
 
 // DUDAS
-// 1 => COMO HACER LO DEL SETTIMEOUT
-// 2 => EL DATETIME PICKER ME PONE UN GMT +1 Y ME LA LÍA AL GUARDARLO EN MONGO
-
+// 1 => LA PUTA PETICION A LA API SEARCHMEATING NO RECIVE EN EL REQ.BODY NADA!!!!!!!!!!!
+// 3 => DIV SCROLLDOWN BOT => https://jsfiddle.net/nex1oa9a/1/
+// 4 => QUERY FILTRAR MEETING ( no funciona el criteria https://github.com/naturet/proyect/blob/master/controllers/experiences.controller.js)
 function App() {
   return (
     <div className="App">
@@ -51,11 +52,9 @@ function App() {
           <AuthenticatedRoute exact path="/meetings" component={Meetings} />
 
           <AuthenticatedRoute exact path="/meetings/create" component={CreateMeeting} />
-
+          <AuthenticatedRoute exact path="/meetings/search" component={SearchMeeting} />
           <AuthenticatedRoute exact path="/conversations/:conversationId" component={chatConversation} />
-
           <AuthenticatedRoute exact path="/chats/:conversationId" component={NewChat} />
-
           <AuthenticatedRoute exact path="/meetings/:meetingId" component={MeetingDetail} />
 
           <Redirect to="/login" />
