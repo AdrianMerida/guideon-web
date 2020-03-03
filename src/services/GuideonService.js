@@ -37,7 +37,7 @@ export const getOneConversation = (id) => http.get(`/conversations/${id}`)
 export const getChat = (id) => http.get(`/chats/${id}`)
 export const sendMsg = (id, msg) => http.post(`/chat/${id}/sendMsg`, msg)
 export const existConversation = (id) => http.get(`/existConversations/${id}`)
-
+export const getConversationId = (id) => http.get(`/getConversationId/${id}`)
 
 // MEETING
 export const getMeetings = () => http.get('/meetings')

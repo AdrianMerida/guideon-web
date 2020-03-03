@@ -1,8 +1,8 @@
 .meetings {
-  width: 100%;
+  width: 90%;
   height: 100%;
-  border: 3px solid blue;
   overflow-y: auto;
   background-color: white;
   opacity: 0.9;
+  margin: 0 auto;
 }

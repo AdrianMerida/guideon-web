@@ -1,5 +1,5 @@
 import React from 'react'
-import { getOneConversation, existConversation } from '../../services/GuideonService'
+import { getOneConversation, existConversation, getConversationId } from '../../services/GuideonService'
 import { Redirect } from 'react-router-dom';
 import withChats from '../../hocs/withChats'
 import { WithAuthConsumer } from '../../contexts/AuthContext'
@@ -14,24 +14,33 @@ class NewChat extends React.Component {
   }
 
   componentDidMount() {
-    const conversationId = this.props.match.params.conversationId
-    getOneConversation(conversationId)
+
+    getConversationId(this.props.match.params.conversationId)
       .then(conversation => {
-        if (!conversation) {
-          //  SI NO ENCUENTRA, ES PORQUE ES UN MENSAJE A UN USUARIO
-          //  HAY QUE VER SI YA EXISTE CONVERSACIÓN ENTRE ELLOS
-          existConversation(conversationId)
-            .then(conver => {
-              if (!conver) {
-                this.setState({ privateMessage: true })
-              } else {
-                // SI ENTRA DESDE EL MAPBOX
-                const converId = conver.chats.conversationId;
-                this.setState({ converId: converId })
-              }
-            })
-        }      
+        if (conversation) {
+          this.setState({ converId: conversation.id })
+        } else {
+          this.setState({ privateMessage: true })
+        }
       })
+    // const conversationId = this.props.match.params.conversationId
+    // getOneConversation(conversationId)
+    //   .then(conversation => {
+    //     if (!conversation) {
+    //       //  SI NO ENCUENTRA, ES PORQUE ES UN MENSAJE A UN USUARIO
+    //       //  HAY QUE VER SI YA EXISTE CONVERSACIÓN ENTRE ELLOS
+    //       existConversation(conversationId)
+    //         .then(conver => {
+    //           if (!conver) {
+    //             this.setState({ privateMessage: true })
+    //           } else {
+    //             // SI ENTRA DESDE EL MAPBOX
+    //             const converId = conver.chats.conversationId;
+    //             this.setState({ converId: converId })
+    //           }
+    //         })
+    //     }      
+    //   })
   }
 
   hidePrivateMessage = () => {
