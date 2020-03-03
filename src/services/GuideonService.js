@@ -42,7 +42,7 @@ export const getConversationId = (id) => http.get(`/getConversationId/${id}`)
 // MEETING
 export const getMeetings = () => http.get('/meetings')
 export const getPendingMeetings = () => http.get('/meetings/pending')
-export const searchMeetings = (data) => http.get('/meetings/search', data)
+export const searchMeetings = (data) => { return http.get('/meetings/search', { params: { search: data.search } }); }
 export const createMeeting = (data) => http.post('/meetings/create', data)
 export const acceptMeeting = (id) => http.put(`/meetings/${id}/accept`)
 export const requestMeeting = (id, data) => http.put(`/meetings/${id}/request`, data)

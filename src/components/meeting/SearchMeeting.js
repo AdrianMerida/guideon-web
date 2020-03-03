@@ -33,7 +33,7 @@ class SearchMeeting extends React.Component {
   }
 
   requestMeeting = (id) => {
-    requestMeeting(id, { receiver: this.props.currentUser.id})
+    requestMeeting(id, { receiver: this.props.currentUser.id })
       .then(meet => {
         if (meet) {
           this.setState({ meetings: this.state.meetings.filter(meeting => meeting.id.toString() !== id.toString()) })
@@ -41,8 +41,10 @@ class SearchMeeting extends React.Component {
       })
   }
 
-  handleSearchMeeting = () => {
-     searchMeetings({ ...this.state })
+  handleSearchMeeting = (e) => {
+
+    e.preventDefault()
+    searchMeetings({ ...this.state })
       .then(meetings => {
         this.setState({ meetings: meetings })
       })
@@ -55,7 +57,7 @@ class SearchMeeting extends React.Component {
 
   handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      this.handleSearchMeeting()
+      this.handleSearchMeeting(e)
     }
   }
 
@@ -64,7 +66,6 @@ class SearchMeeting extends React.Component {
     if (!this.state.meetings) {
       return <div>No meetings...</div>
     }
-
     return (
       <div className="search-meeting">
         <form className="search-meeting-finder">
@@ -80,6 +81,7 @@ class SearchMeeting extends React.Component {
           <div className="search-meeting-container" key={i} >
             <div className="search-meeting-img">
               <img src={meeting.sender.avatarUrl} alt="avatar" />
+              <h3>{meeting.sender.name}</h3>
             </div>
             <div className="search-meeting-info">
               <div className="search-meeting-field">
@@ -92,17 +94,20 @@ class SearchMeeting extends React.Component {
                 <i className="fa fa-hourglass search-meeting-icon color-sand"></i>
                 <div className="search-meeting-data">
                   {meeting.duration} hours
-            </div>
+                </div>
               </div>
               <div className="search-meeting-field">
                 <i className="fa fa-calendar search-meeting-icon color-black"></i>
                 <div className="search-meeting-data">
-                   {this.messageDate(meeting.date)}
+                  {this.messageDate(meeting.date)}
                 </div>
               </div>
             </div>
             <div className="search-meeting-request">
               <button className="search-meeting-request-button" onClick={() => this.requestMeeting(meeting.id)}>Request</button>
+            </div>
+            <div className="search-meeting-description">
+              <h3>{meeting.description}</h3>
             </div>
           </div>
         )}

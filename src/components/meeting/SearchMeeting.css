@@ -37,7 +37,7 @@
     justify-content: space-evenly;
     align-items: center;
     height: 15%;
-    width: 100%;
+    width: 95%;
     margin-bottom: 2px;
     color: blue;
     text-decoration: none;
@@ -51,12 +51,21 @@
 
   .search-meeting-img {
     width: 20%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
   }
 
   .search-meeting-img img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
+  }
+
+  .search-meeting-img h3 {
+    color: red;
   }
 
   .search-meeting-info {
@@ -102,4 +111,10 @@
     border: 2px solid black;
     font-weight: bold;
     margin-right: 5px;
+  }
+
+  .search-meeting-description {
+    width: 100%;
+    height: 20%;
+    border: 3px solid red;
   }
