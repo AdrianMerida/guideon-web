@@ -107,3 +107,7 @@
     color: white;
     text-align: center;
 }
+
+.single-meeting-hide-button {
+    display: none;
+}

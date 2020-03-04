@@ -102,12 +102,15 @@ class SearchMeeting extends React.Component {
                   {this.messageDate(meeting.date)}
                 </div>
               </div>
+              <div className="search-meeting-field">
+                <i className="fa fa-info search-meeting-icon color-black"></i>
+                <div className="search-meeting-data">
+                 {meeting.description}
+                </div>
+              </div>
             </div>
             <div className="search-meeting-request">
               <button className="search-meeting-request-button" onClick={() => this.requestMeeting(meeting.id)}>Request</button>
-            </div>
-            <div className="search-meeting-description">
-              <h3>{meeting.description}</h3>
             </div>
           </div>
         )}

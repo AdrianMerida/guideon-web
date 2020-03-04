@@ -1,24 +1,29 @@
 import React from 'react'
 import './SingleMeeting.css'
-import { Link } from 'react-router-dom'
-import { acceptMeeting } from '../../services/GuideonService'
+import { acceptMeeting, declineMeeting } from '../../services/GuideonService'
 import MeetingDetail from './MeetingDetail'
 
 class SingleMeeting extends React.Component {
 
   state = {
     meeting: this.props.meeting,
-    meetingDetail: false
+    meetingDetail: false,
+    imTheSender: this.props.imTheSender
   }
 
   handleClickAccept = () => {
     acceptMeeting(this.state.meeting.id)
       .then(meeting => {
-        console.log('Accepted')
+        this.setState({meeting: meeting})
       })
   }
 
-  handleClickDecline = () => (console.log('declined'))
+  handleClickDecline = () => (
+    declineMeeting(this.state.meeting.id)
+      .then(meeting => {
+        this.setState({ meeting: meeting })
+      })
+  )
 
   capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -33,27 +38,29 @@ class SingleMeeting extends React.Component {
   }
 
   showDetail = () => {
-    this.setState({meetingDetail: true})
+    this.setState({ meetingDetail: true })
   }
 
   onClickHide = () => {
-    this.setState({meetingDetail: false})
+    this.setState({ meetingDetail: false })
   }
 
 
   render() {
 
-     if (!this.state.meeting) {
+    if (!this.state.meeting) {
       return <div>Loading...</div>
     }
 
-    if(this.state.meetingDetail){
+    if (this.state.meetingDetail) {
       return <MeetingDetail meeting={this.state.meeting} onClickHide={this.onClickHide} />
     }
 
+    const hideButton = this.state.imTheSender ? '' : 'single-meeting-hide-button'
+
     return (
- 
-      <div onClick={this.showDetail} className="single-meeting-container" >
+
+      <div className="single-meeting-container" >
 
         <div className="single-meeting-users">
           <img src={this.state.meeting.sender.avatarUrl} alt="avatar" />
@@ -62,7 +69,7 @@ class SingleMeeting extends React.Component {
           )}
         </div>
 
-        <div className="single-meeting-info">
+        <div onClick={this.showDetail} className="single-meeting-info">
           <div className="single-meeting-data">
             <i className="fa fa-map-marker color-red"></i>
             <h4>{this.state.meeting.location}</h4>
@@ -87,8 +94,8 @@ class SingleMeeting extends React.Component {
           {this.state.meeting.state === 'requested' && (
             <div className="single-meeting-buttons">
               <div className="single-meeting-state"><strong>Requested</strong></div>
-              <div className="single-meeting-accept" onClick={this.handleClickAccept}>Accept</div>
-              <div className="single-meeting-decline" onClick={this.handleClickDecline}>Decline</div>
+              <div className={`single-meeting-accept ${hideButton}`} onClick={this.handleClickAccept}>Accept</div>
+              <div className={`single-meeting-decline ${hideButton}`} onClick={this.handleClickDecline}>Decline</div>
             </div>
           )}
         </div>

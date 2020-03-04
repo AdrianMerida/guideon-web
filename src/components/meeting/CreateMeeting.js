@@ -13,7 +13,7 @@ class CreateMeeting extends React.Component {
     sender: this.props.currentUser.id,
     location: '',
     duration: '',
-    date: new Date(),
+    date: null,
     loading: false,
     locationOptions: [],
     errorLocation: false, // por si diera tiempo
@@ -67,7 +67,7 @@ class CreateMeeting extends React.Component {
     // console.log(date)
     // return
     // console.log(typeof(new Date(date.toString())))
-    this.setState({ date: date.toString() })
+    this.setState({ date: date })
   }
 
   selectDurationChange = event => {

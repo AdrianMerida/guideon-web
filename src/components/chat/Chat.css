@@ -6,7 +6,6 @@
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  opacity: 0.9;
 }
 
 .chat-information {
@@ -34,7 +33,7 @@
 
 .chat-information button {
   position: absolute;
-  right: 5px;
+  right: 7%;
   top: 5px;
   margin-top: 80px;
   border: none;

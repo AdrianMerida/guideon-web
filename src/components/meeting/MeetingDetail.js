@@ -9,7 +9,8 @@ class MeetingDetail extends React.Component {
     loading: false,
     meeting: this.props.meeting,
     closeMeeting: false,
-    showChat: false
+    showChat: false,
+    enableChat: this.props.meeting.state === 'accepted' ? true : false
   }
 
   componentDidMount() {
@@ -45,6 +46,7 @@ class MeetingDetail extends React.Component {
     }
 
     const closeClass = this.state.closeMeeting ? 'close-meeting' : ''
+    const enableChat = this.state.enableChat ? '' : 'meeting-hide-chat'
 
     return (
       <div className={`meeting-detail ${closeClass}`}>
@@ -56,7 +58,7 @@ class MeetingDetail extends React.Component {
             <div className="meeting-detail-sender">
               <img src={this.state.meeting.sender.avatarUrl} alt="avatar"></img>
               {/* <Link to={`/chats/${this.state.meeting.sender.id}`} className="meeting-detail-chat fa fa-comment fa-2x"></Link> */}
-              <div onClick={this.showChat} className="meeting-detail-chat fa fa-comment fa-2x"></div>
+              <div onClick={this.showChat} className={`${enableChat} meeting-detail-chat fa fa-comment fa-2x`}></div>
               <h3>{this.state.meeting.sender.name}</h3>
             </div>
 
@@ -64,7 +66,7 @@ class MeetingDetail extends React.Component {
               <div className="meeting-detail-receiver">
                 <img src={this.state.meeting.receiver.avatarUrl} alt="avatar"></img>
                 {/* <Link to={`/chats/${this.state.meeting.receiver.id}`} className="meeting-detail-chat fa fa-comment fa-2x"></Link> */}
-                <div onClick={this.showChat} className="meeting-detail-chat fa fa-comment fa-2x"></div>
+                <div onClick={this.showChat} className={`${enableChat} meeting-detail-chat fa fa-comment fa-2x`}></div>
                 <h3>{this.state.meeting.receiver.name}</h3>
               </div>
             )}

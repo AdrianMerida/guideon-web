@@ -13,7 +13,9 @@ const Meetings = ({ meetings, currentUser }) => {
   return (
     <div className="meetings">
       {meetings.map((meeting, i) =>
-        <SingleMeeting meeting={meeting} key={i} />
+        <SingleMeeting
+          meeting={meeting}
+          imTheSender={currentUser.id.toString() === meeting.sender.id.toString() ? true : false} key={i} />
       )}
     </div>
   )
