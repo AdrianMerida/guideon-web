@@ -14,10 +14,6 @@ import Meetings from './components/meeting/Meetings';
 import MeetingDetail from './components/meeting/MeetingDetail';
 import SearchMeeting from './components/meeting/SearchMeeting';
 
-// DUDAS
-// 1 => LA PUTA PETICION A LA API SEARCHMEATING NO RECIVE EN EL REQ.BODY NADA!!!!!!!!!!!
-// 3 => DIV SCROLLDOWN BOT => https://jsfiddle.net/nex1oa9a/1/
-// 4 => QUERY FILTRAR MEETING ( no funciona el criteria https://github.com/naturet/proyect/blob/master/controllers/experiences.controller.js)
 function App() {
   return (
     <div className="App">
